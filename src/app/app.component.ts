@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'myapp';
+  isCheckoutPage = false;
+
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isCheckoutPage = this.router.url === '/checkout';
+
+       
+       
+      }
+    });
+  }
 }
